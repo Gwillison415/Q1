@@ -29,6 +29,9 @@ document.addEventListener('DOMContentLoaded', function() {
   let dateFormatter = require('./dateFormatter');
   //let APIcallFormatter = require('./APIcallFormatter');
   let capitalize = require('./capitalizeWords');
+
+  //pipe in DUMMY data
+  var dummyData = require('./dummyData')
   let formData = {
     city: '',
     //airQualityType: [],  // probably should automate object #2
@@ -52,24 +55,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // BuildURL
     buildURL(byMeasurementBaseURL, formData.city, formData.startDate, formData.endDate, formData.airQualityType2)
+    //buildURL(byMeasurementBaseURL, formData.city, formData.startDate, formData.endDate, formData.airQualityType2) //pro tip build a fake input set
     // call API Fn
 
-
+//.json() takes response and returns a promise that resolves to parse body
     //API call
-      // let request = fetch(buildURL(byMeasurementBaseURL, formData.city, formData.startDate, formData.endDate, formData.airQualityType2));
-      // request
-      //   .then(response => {
-      //     console.log(response.json());
-      //      return response.json();
-      //     console.log(JSON.parse(response));
-      //   })
-      //   .then( resolvedValue => {
-      //     console.log(resolvedValue.body());
-      //   })
-      //   .catch(err => {
-      //     console.log(err);
-      //     return err;
-      //   })
+      let request = fetch(buildURL(byMeasurementBaseURL, formData.city, formData.startDate, formData.endDate, formData.airQualityType2));
+      request
+        .then(response => {
+          //console.log(response.json());  one can only call .json method ONCE
+           return response.json();
+        })
+        .then( resolvedValue => {
+          console.log(resolvedValue);
+        })
+        .catch(err => {
+          console.log(err);
+          return err;
+        })
       // .then(jsonData =>{
       //   console.log(jsonData.body.results);
       //   console.log('body', jsonData.body(), '@zero', jsonData[0]);
@@ -96,15 +99,30 @@ function buildURL(BaseURL, cityID, dateFrom, dateTo, airQualityParametersObj ) {
     if (dateTo) {
       var completeURL = semiBuiltURL+ allParametersString +`&date_from=${dateFrom}&date_to=${dateTo}`;
     } else {
-      
+
       var completeURL = semiBuiltURL+ allParametersString +`&date_from=${dateFrom}`;
     }
     console.log(completeURL);
     return completeURL;
 }
 
+function createTable(arrOfOBj) {
+  let headerArr = ["Date", "Location", "Type", "Value", "Unit"];
+  // var table = $('<table>');
+  var thead = $('<thead>');
+  $('table').append(thead);
+  let trHead = $('<tr>')
+  trHead.appendTo($(thead));
+  for (var i = 0; i < headerArr.length; i++) {
+    var tr = $('<tr>');
+    let th = $('<th>')
+    th.appendTo(trHead);
+    th.text(headerArr[i]);
 
-
+  }
+  
+}
+createTable(dummyData);
     // Initialize collapsible (uncomment the line below if you use the dropdown variation)
     //$('.collapsible').collapsible();
   //   let div = $('<div>')

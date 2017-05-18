@@ -1612,16 +1612,28 @@ let data ={
         }
     ]
 }//ASK WHY let 'idx' was used before it was declared in map
-newDataSet = [["Date", "Location", "Type", "Value", "Unit"]];
+
+// returns a 2d array of values from the data
 function pullData(data) {
-    var collectionToAppend = data.results.map((valueSet, idx) =>  [formatDate([idx].date.local), [idx].location ])
-    console.log(collectionToAppend);
+    var collectionToAppend = data.results.map((valueSet, idx) =>  [formatDate(valueSet.date.local), valueSet.location, valueSet.parameter, valueSet.value, valueSet.unit ])
+
+    //console.log(collectionToAppend);
+    return collectionToAppend;
 }
-//pullData(data)
+pullData(data;
 
 function formatDate(string) {
-  console.log(string.slice(0, 10));
+  // console.log(string.slice(0, 10));
   return string.slice(0, 10);
 }
 
 //formatDate(data.results[0].date.local);
+
+// pull data results:
+// [
+//   [ '2017-05-17', 'Oakland West', 'o3', 0.032, 'ppm' ],
+//   [ '2017-05-17', 'Oakland West', 'pm25', 9, 'µg/m³' ],
+//   [ '2017-05-17', 'Oakland West', 'no2', 0.01, 'ppm' ],
+//   [ '2017-05-17', 'Oakland West', 'co', 0.51, 'ppm' ],
+//   [ '2017-05-17', 'Oakland West', 'bc', 0.31, 'µg/m³' ],
+// ]
