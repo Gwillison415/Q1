@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
     formData.endDate = dateFormatter($("#endDate").val());
     $(":checkbox").get().forEach(elem => {
       formData.airQualityType2[elem.id] = elem.checked;
-      console.log(formData.startDate);
+      //console.log('start date from form:', formData.startDate);
     });
     //formData.airQualityType = $(":checkbox").get().map(elem => elem.checked);  //$("#pm10switch").val();
     //console.log('submit happened', 'form input', inputArr);
@@ -73,16 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
           console.log(err);
           return err;
         })
-      // .then(jsonData =>{
-      //   console.log(jsonData.body.results);
-      //   console.log('body', jsonData.body(), '@zero', jsonData[0]);
-      //   return jsonData.body();
-      // })
-      // .then(response => {
-      //   console.log(response);
-      // })
 
-      //'templateUrl': 'app/endpoints/cities-form.directive.html',
   })
 //Allowed values: pm25, pm10, so2, no2, o3, co, bc
 //takes date and formats to
@@ -106,13 +97,30 @@ function buildURL(BaseURL, cityID, dateFrom, dateTo, airQualityParametersObj ) {
     return completeURL;
 }
 
-function createTable(arrOfOBj) {
+//renders data into 2d array for table build
+function formatDataForTableBuilding(data) {
+    var collectionToAppend = data.results.map((valueSet, idx) =>  [formatDate(valueSet.date.local), valueSet.location, valueSet.parameter, valueSet.value, valueSet.unit ])
+
+    //console.log(collectionToAppend);
+    return collectionToAppend;
+}
+
+// formats the date used in formatDataForTableBuilding
+function formatDate(string) {
+  // console.log(string.slice(0, 10));
+  return string.slice(0, 10);
+}
+
+//creates and projects a table onto page
+function createTable(formattedJSONData2Darray) {
   let headerArr = ["Date", "Location", "Type", "Value", "Unit"];
   // var table = $('<table>');
   var thead = $('<thead>');
   $('table').append(thead);
   let trHead = $('<tr>')
-  trHead.appendTo($(thead));
+
+
+  //append head with names
   for (var i = 0; i < headerArr.length; i++) {
     var tr = $('<tr>');
     let th = $('<th>')
@@ -120,15 +128,34 @@ function createTable(arrOfOBj) {
     th.text(headerArr[i]);
 
   }
-  
-}
-createTable(dummyData);
-    // Initialize collapsible (uncomment the line below if you use the dropdown variation)
-    //$('.collapsible').collapsible();
-  //   let div = $('<div>')
-  // $('#main').append(div).text()
-  // var promiseRadio1 = new Promise()
+  trHead.appendTo($(thead));
+  //append body with values
+  // for (var i = 0; i < headerArr.length; i++) {
+  //
+  //   //$("tbody").append(tr.html("value"));
+  //   //$(tbody).append($(tr).html("value"));  //tobdy not d
+  //   //appends
+  //
+  //
+  //   //$('#insertLocation').append('<tr>').html("value");
+  // }
 
+  for (var i = 0; i < formattedJSONData2Darray.length; i++) {
+    let tr = $('<tr>');
+    $('#insertLocation').append($(tr)); //apends 1 value
+      for (var ii = 0; ii < formattedJSONData2Darray[i].length; ii++) {
+        var td = $('<td>');
+        $(tr).append(td.text(formattedJSONData2Darray[i][ii]));
+      }
+    // formattedJSONData2Darray[i].forEach(columnElemText =>
+    //     $(tr).append(td.text(columnElemText))
+    //  );
+  }
+  console.log(formattedJSONData2Darray.length);
+
+
+}
+createTable(formatDataForTableBuilding(dummyData));
 
 
 });

@@ -1,6 +1,4 @@
-//module.exports =
-
-let data ={
+module.exports ={
     "meta": {
         "name": "openaq-api",
         "license": "CC BY 4.0",
@@ -1614,18 +1612,21 @@ let data ={
 }//ASK WHY let 'idx' was used before it was declared in map
 
 // returns a 2d array of values from the data
-function pullData(data) {
-    var collectionToAppend = data.results.map((valueSet, idx) =>  [formatDate(valueSet.date.local), valueSet.location, valueSet.parameter, valueSet.value, valueSet.unit ])
+//currently in initialize.js
 
-    //console.log(collectionToAppend);
-    return collectionToAppend;
-}
-pullData(data;
+// function formatDataForTableBuilding(data) {
+//     var collectionToAppend = data.results.map((valueSet, idx) =>  [formatDate(valueSet.date.local), valueSet.location, valueSet.parameter, valueSet.value, valueSet.unit ])
+//
+//     //console.log(collectionToAppend);
+//     return collectionToAppend;
+// }
+// pullData(data);
 
-function formatDate(string) {
-  // console.log(string.slice(0, 10));
-  return string.slice(0, 10);
-}
+//currently in initialize.js
+// function formatDate(string) {
+//   // console.log(string.slice(0, 10));
+//   return string.slice(0, 10);
+// }
 
 //formatDate(data.results[0].date.local);
 
