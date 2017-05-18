@@ -25,61 +25,92 @@ document.addEventListener('DOMContentLoaded', function() {
  );
  });
   var byLocationBaseURL = "https://api.openaq.org/v1/locations";
-  var byMeasurementBaseURL = "https://api.openaq.org/v1/measurements";
-  //let addCity = `?city=${cityName}`;
-  var buildURL = require('./buildURL');
+  var byMeasurementBaseURL = "https://api.openaq.org/v1/measurements?";  //used in APICall
   let dateFormatter = require('./dateFormatter');
+  //let APIcallFormatter = require('./APIcallFormatter');
+  let capitalize = require('./capitalizeWords');
   let formData = {
     city: '',
-    airQualityType: [],  // probably should automate object #2
+    //airQualityType: [],  // probably should automate object #2
     startDate: '',
-    endDate: '',
+    endDate: false,
     airQualityType2: { },
   }
-  //populate date feild
   $('form').submit(event => {
     //var inputArr = $('form :input')
     event.preventDefault();
-    formData.city = $("#city").val();
+    formData.city = capitalize($("#city").val());
     formData.startDate = dateFormatter($("#startDate").val());
     formData.endDate = dateFormatter($("#endDate").val());
     $(":checkbox").get().forEach(elem => {
       formData.airQualityType2[elem.id] = elem.checked;
+      console.log(formData.startDate);
     });
     //formData.airQualityType = $(":checkbox").get().map(elem => elem.checked);  //$("#pm10switch").val();
     //console.log('submit happened', 'form input', inputArr);
       //$(":checkbox").val()
-    console.log(formData, formData.airQualityType2 );
+
+    // BuildURL
+    buildURL(byMeasurementBaseURL, formData.city, formData.startDate, formData.endDate, formData.airQualityType2)
+    // call API Fn
+
+
+    //API call
+      // let request = fetch(buildURL(byMeasurementBaseURL, formData.city, formData.startDate, formData.endDate, formData.airQualityType2));
+      // request
+      //   .then(response => {
+      //     console.log(response.json());
+      //      return response.json();
+      //     console.log(JSON.parse(response));
+      //   })
+      //   .then( resolvedValue => {
+      //     console.log(resolvedValue.body());
+      //   })
+      //   .catch(err => {
+      //     console.log(err);
+      //     return err;
+      //   })
+      // .then(jsonData =>{
+      //   console.log(jsonData.body.results);
+      //   console.log('body', jsonData.body(), '@zero', jsonData[0]);
+      //   return jsonData.body();
+      // })
+      // .then(response => {
+      //   console.log(response);
+      // })
+
+      //'templateUrl': 'app/endpoints/cities-form.directive.html',
   })
 //Allowed values: pm25, pm10, so2, no2, o3, co, bc
 //takes date and formats to
+function buildURL(BaseURL, cityID, dateFrom, dateTo, airQualityParametersObj ) {
+    parameterKeys = Object.keys(airQualityParametersObj);
+    // creates a collection of all selected parameters (so2, CO2 etc)
+    let parameters = parameterKeys.filter(param => {
+      if(airQualityParametersObj[param] === true) {
+      return param;
+    }
+  })
+    let semiBuiltURL = `${BaseURL}city=${cityID}`;
+    let allParametersString = parameters.map(elem => `&parameter=${elem}`).join('');
+    if (dateTo) {
+      var completeURL = semiBuiltURL+ allParametersString +`&date_from=${dateFrom}&date_to=${dateTo}`;
+    } else {
+      
+      var completeURL = semiBuiltURL+ allParametersString +`&date_from=${dateFrom}`;
+    }
+    console.log(completeURL);
+    return completeURL;
+}
 
 
-//sample formData  Object {city: "san francisco", airQualityType: "", startDate: "1 May, 2017", endDate: "2 May, 2017"}
-// form submit  $('#startDate').value()
 
     // Initialize collapsible (uncomment the line below if you use the dropdown variation)
     //$('.collapsible').collapsible();
-    let div = $('<div>')
+  //   let div = $('<div>')
   // $('#main').append(div).text()
-  //var promiseRadio1 = new Promise()
+  // var promiseRadio1 = new Promise()
 
-// API call
-  // let request = fetch(byMeasurementBaseURL);
-  // request
-  //   .then(locationResponse => {
-  //     console.log(locationResponse.json());
-  //      return locationResponse.json();
-  //     console.log(JSON.parse(locationResponse));
-  //   })
-  // .then(jsonData =>{
-  //   console.log(jsonData.body.results);
-  //   console.log('body', jsonData.body(), '@zero', jsonData[0]);
-  //   return jsonData.body();
-  // })
-  // .then(response => {
-  //   console.log(response);
-  // })
-  //'templateUrl': 'app/endpoints/cities-form.directive.html',
+
 
 });
