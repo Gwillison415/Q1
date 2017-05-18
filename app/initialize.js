@@ -67,7 +67,8 @@ document.addEventListener('DOMContentLoaded', function() {
            return response.json();
         })
         .then( resolvedValue => {
-          console.log(resolvedValue);
+          createTable(formatDataForTableBuilding(resolvedValue));
+          //console.log(resolvedValue);
         })
         .catch(err => {
           console.log(err);
@@ -126,20 +127,9 @@ function createTable(formattedJSONData2Darray) {
     let th = $('<th>')
     th.appendTo(trHead);
     th.text(headerArr[i]);
-
   }
   trHead.appendTo($(thead));
-  //append body with values
-  // for (var i = 0; i < headerArr.length; i++) {
-  //
-  //   //$("tbody").append(tr.html("value"));
-  //   //$(tbody).append($(tr).html("value"));  //tobdy not d
-  //   //appends
-  //
-  //
-  //   //$('#insertLocation').append('<tr>').html("value");
-  // }
-
+  //append table with values to head
   for (var i = 0; i < formattedJSONData2Darray.length; i++) {
     let tr = $('<tr>');
     $('#insertLocation').append($(tr)); //apends 1 value
@@ -155,7 +145,7 @@ function createTable(formattedJSONData2Darray) {
 
 
 }
-createTable(formatDataForTableBuilding(dummyData));
+//createTable(formatDataForTableBuilding(dummyData));
 
 
 });
