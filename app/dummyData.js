@@ -1,4 +1,4 @@
-module.exports ={
+var data ={
     "meta": {
         "name": "openaq-api",
         "license": "CC BY 4.0",
@@ -1613,21 +1613,55 @@ module.exports ={
 
 // returns a 2d array of values from the data
 //currently in initialize.js
+var collectionToAppend;
+function formatDataForTableBuilding(data) {
+    collectionToAppend = data.results.map((valueSet, idx) =>  [formatDate(valueSet.date.local), timeFormatter(valueSet.date.local), valueSet.location, valueSet.parameter, valueSet.value, valueSet.unit ])
 
-// function formatDataForTableBuilding(data) {
-//     var collectionToAppend = data.results.map((valueSet, idx) =>  [formatDate(valueSet.date.local), valueSet.location, valueSet.parameter, valueSet.value, valueSet.unit ])
-//
-//     //console.log(collectionToAppend);
-//     return collectionToAppend;
-// }
-// pullData(data);
+    console.log(collectionToAppend);
+    return collectionToAppend;
+}
 
+function c3DataFormatter(data) {
+    var measurementType = [collectionToAppend[0][3]];
+    counter = 1;
+
+    //method to pull each collected param 02,so2 etc
+    while (!measurementType.includes(collectionToAppend[counter][3])) {
+      measurementType.push(collectionToAppend[counter][3]);
+      counter++;
+    }
+    console.log(measurementType);
+
+  //  for each measurement, and for each city, build a table by collected param and time
+
+//create first d of 2d array
+    let outputArray = [];
+    for (var i = 0; i < measurementType.length; i++) {
+      outputArray.push([measurementType[i]])
+      data.results.filter((dataSet, idx) => if (dataSet.parameter === measurementType[i]) {
+
+      })
+    }
+
+    // var outputFormat = []
+    // for (var i = 0; i < data.length; i++) {
+    //   var cityName = data.results[i].location;
+    //
+    //   if (cityName === data.results[i -1].location || i === 0) {
+    //     outputFormat.push(cityName, )
+    //   }
+    //   data.results.map(item => )
+    // }
+}
+c3DataFormatter(formatDataForTableBuilding(data));
 //currently in initialize.js
-// function formatDate(string) {
-//   // console.log(string.slice(0, 10));
-//   return string.slice(0, 10);
-// }
-
+function formatDate(string) {
+  // console.log(string.slice(0, 10));
+  return string.slice(0, 10);
+}
+function timeFormatter(string) {
+  return string.slice(11, 16);
+}
 //formatDate(data.results[0].date.local);
 
 // pull data results:
