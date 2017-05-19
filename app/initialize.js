@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
   $(document).ready(function(){
       $('.parallax').parallax();
       $('select').material_select();
-
+      // $('.modal').modal();
       $('.dropdown-button').dropdown({
      inDuration: 300,
      outDuration: 225,
@@ -24,6 +24,13 @@ document.addEventListener('DOMContentLoaded', function() {
    }
  );
  });
+
+ $("#MDtrigger").click(function(){
+  // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+  console.log('fired');
+  $('.modal').openModal();
+});
+
   var byLocationBaseURL = "https://api.openaq.org/v1/locations";
   var byMeasurementBaseURL = "https://api.openaq.org/v1/measurements?";  //used in APICall
   let dateFormatter = require('./dateFormatter');
