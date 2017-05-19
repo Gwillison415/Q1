@@ -3,6 +3,15 @@ module.exports=function formatDate(string) {
       let year = string.slice(7);
       let month = string.slice(2, 5);
       let day = string.slice(0, 1)
+
+      if (!isNaN(parseInt(string.charAt(1)))) {
+        console.log('date is more than 9', parseInt(string.charAt(1)));
+         year = string.slice(8);
+         month = string.slice(3, 6);
+         day = string.slice(0, 2);
+
+      }
+      
       if (string.length ===0 ) {
         return false;
       }
@@ -47,6 +56,7 @@ module.exports=function formatDate(string) {
         return "date entry error";
       }
       let formattedDate = year+"-"+month+"-"+day;
+      console.log(year+"-"+month+"-"+day);
       return formattedDate;
   };
 //sample formData  Object {city: "san francisco", airQualityType: "", startDate: "1 May, 2017", endDate: "2 May, 2017"}

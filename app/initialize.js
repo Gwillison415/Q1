@@ -49,6 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
       formData.airQualityType2[elem.id] = elem.checked;
       //console.log('start date from form:', formData.startDate);
     });
+    console.log(formData, 'passed in end date', $("#endDate").val(), 'passed in startDate', $("#startDate").val());
     //formData.airQualityType = $(":checkbox").get().map(elem => elem.checked);  //$("#pm10switch").val();
     //console.log('submit happened', 'form input', inputArr);
       //$(":checkbox").val()
@@ -86,6 +87,7 @@ function buildURL(BaseURL, cityID, dateFrom, dateTo, airQualityParametersObj ) {
       return param;
     }
   })
+  console.log(dateFrom, dateTo);
     let semiBuiltURL = `${BaseURL}city=${cityID}`;
     let allParametersString = parameters.map(elem => `&parameter=${elem}`).join('');
     if (dateTo) {
