@@ -9,7 +9,10 @@
     "start": "brunch watch --server",
     "build": "brunch build --production"
   },
-  "dependencies": {},
+  "dependencies": {
+    "c3": "^0.4.11",
+    "d3": "^4.9.1"
+  },
   "devDependencies": {
     "auto-reload-brunch": "^2",
     "brunch": "^2",

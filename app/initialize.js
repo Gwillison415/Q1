@@ -30,8 +30,8 @@ document.addEventListener('DOMContentLoaded', function() {
   //let APIcallFormatter = require('./APIcallFormatter');
   let capitalize = require('./capitalizeWords');
 
-  //pipe in DUMMY data
-  var dummyData = require('./dummyData')
+  //pipe in DUMMY data no longer needed
+  //var dummyData = require('./dummyData')
   let formData = {
     city: '',
     //airQualityType: [],  // probably should automate object #2

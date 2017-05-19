@@ -12,13 +12,13 @@
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="/materialize.min.css"  media="screen,projection"/>
-    <title>Golden Waffle</title>
+    <title>Air Data</title>
   </head>
   <body>
 
   <nav>
     <div class="nav-wrapper #bf360c deep-orange darken-4">
-      <a href="#" class="brand-logo center">NPR Program Finder</a>
+      <a href="#" class="brand-logo center">Find Air Quality Data in Your Hood!</a>
       <ul id="nav-mobile" class="left hide-on-med-and-down">
         <li><a href="contact.html">Contact</a></li>
         <li><a href="about.html">About</a></li>
@@ -29,7 +29,7 @@
   </nav>
   <div class="col s12 m6">
     <div class="parallax-container">
-    <div class="parallax"><img src="npr_logo_rgb.jpg"></div>
+    <div class="parallax"><img src="types_of_sources_air_pollution.jpg"></div>
   </div>
   </div>
   <div class="col s12 m6 pull" id="main">
@@ -55,11 +55,11 @@
   <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
 
   <div class="row">
-      <form class="col s12">
-        <div class="col s6">
+      <form class="col s8">
+        <div class="col s3">
 
             <div class="row">
-              <div class="input-field col s6">
+              <div class="input-field">
                 <input placeholder="Give me a City!" id="city" type="text" class="validate">
                 <label for="city"></label>
               </div>
@@ -84,7 +84,7 @@
      </button>
             </div>
         </div>
-        <div class="col push s5">
+        <div class="col s3">
           <!-- Switch -->
           <div class="switch"   >
             <p>PM10</p>
@@ -126,43 +126,47 @@
               On
             </label>
           </div>
-          <div class="switch">
-              <p>Nitrogen Dioxide</p>
-            <label>
-              Off
-              <input name="qualityTypes" type="checkbox" id="no2">
-              <span class="lever"></span>
-              On
-            </label>
-          </div>
-          <div class="switch">
-              <p>Ozone</p>
-            <label>
-              Off
-              <input name="qualityTypes" type="checkbox" id="o3">
-              <span class="lever"></span>
-              On
-            </label>
-          </div>
-          <div class="switch">
-              <p>Carbon Monoxide</p>
-            <label>
-              Off
-              <input name="qualityTypes" type="checkbox" id="co">
-              <span class="lever"></span>
-              On
-            </label>
-          </div>
-          <div class="switch">
-              <p>Black Carbon</p>
-            <label>
-              Off
-              <input name="qualityTypes" type="checkbox" id="bc">
-              <span class="lever"></span>
-              On
-            </label>
-          </div>
+
         </div>
+        <div class="col s3">
+
+        <div class="switch">
+            <p>Nitrogen Dioxide</p>
+          <label>
+            Off
+            <input name="qualityTypes" type="checkbox" id="no2">
+            <span class="lever"></span>
+            On
+          </label>
+        </div>
+        <div class="switch">
+            <p>Ozone</p>
+          <label>
+            Off
+            <input name="qualityTypes" type="checkbox" id="o3">
+            <span class="lever"></span>
+            On
+          </label>
+        </div>
+        <div class="switch">
+            <p>Carbon Monoxide</p>
+          <label>
+            Off
+            <input name="qualityTypes" type="checkbox" id="co">
+            <span class="lever"></span>
+            On
+          </label>
+        </div>
+        <div class="switch">
+            <p>Black Carbon</p>
+          <label>
+            Off
+            <input name="qualityTypes" type="checkbox" id="bc">
+            <span class="lever"></span>
+            On
+          </label>
+        </div>
+      </div>
       </form>
     </div>
 
