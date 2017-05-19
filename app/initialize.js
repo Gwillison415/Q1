@@ -112,6 +112,9 @@ function formatDate(string) {
   return string.slice(0, 10);
 }
 
+function timeFormatter(string) {
+  return string.slice(11, 16);
+}
 //creates and projects a table onto page
 function createTable(formattedJSONData2Darray) {
   let headerArr = ["Date", "Location", "Type", "Value", "Unit"];
