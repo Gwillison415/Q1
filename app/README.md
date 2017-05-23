@@ -12,7 +12,7 @@ This project exists because I am interested in air quality as a member of the co
 
 ## Installation
 
-No Installation required! Please head over to  http://able-stamp.surge.sh/ and punch in a city and a date. NOTE - for some reason that site does not deploy correctly... Maybe it takes a minute - who knows.
+No Installation required! Please head over to  http://gentle-division.surge.sh/ and punch in a city and a date.
 
 ## API Reference
 This HTML5 project is built with:
